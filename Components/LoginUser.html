@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Mi Sitio Web</title>
+    <style>
+        /* ===============================
+           RESET Y VARIABLES GLOBALES
+        =============================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --success-color: #27ae60;
+            --error-color: #e74c3c;
+            --text-dark: #333;
+            --text-medium: #666;
+            --text-light: #999;
+            --border-color: #e1e5e9;
+            --white: #fff;
+            --shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            --border-radius: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        /* ===============================
+           ESTILOS BASE
+        =============================== */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        /* ===============================
+           CONTENEDOR PRINCIPAL
+        =============================== */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+            border-radius: 20px 20px 0 0;
+        }
+
+        /* ===============================
+           HEADER/LOGO
+        =============================== */
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo h1 {
+            color: var(--text-dark);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .logo p {
+            color: var(--text-medium);
+            font-size: 14px;
+        }
+
+        /* ===============================
+           MENSAJES
+        =============================== */
+        .success-message {
+            color: var(--success-color);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 20px;
+            display: none;
+            padding: 10px;
+            background: rgba(39, 174, 96, 0.1);
+            border-radius: 8px;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* ===============================
+           FORMULARIO
+        =============================== */
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            transition: var(--transition);
+            background: var(--white);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: var(--error-color);
+            animation: shake 0.5s;
+        }
+
+        /* ===============================
+           ANIMACIONES
+        =============================== */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===============================
+           CONTROLES ESPECIALES
+        =============================== */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 43px;
+            cursor: pointer;
+            color: var(--text-medium);
+            user-select: none;
+            font-size: 18px;
+        }
+
+        .password-toggle:hover {
+            color: var(--text-dark);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: var(--text-medium);
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+            width: auto;
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ===============================
+           BOTONES
+        =============================== */
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        /* ===============================
+           SECCIÓN SOCIAL
+        =============================== */
+        .divider {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            color: var(--text-light);
+            font-size: 14px;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 20px;
+        }
+
+        .social-login {
+            display: grid;
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--white);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        /* ===============================
+           ENLACES DE REGISTRO
+        =============================== */
+        .register-link {
+            text-align: center;
+            margin-top: 25px;
+            color: var(--text-medium);
+            font-size: 14px;
+        }
+
+        .register-link a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* ===============================
+           RESPONSIVE DESIGN
+        =============================== */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+                margin: 10px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ===============================
+         ESTRUCTURA HTML
+    =============================== -->
+    <div class="login-container">
+        <!-- Header -->
+        <div class="logo">
+            <h1>Bienvenido</h1>
+            <p>Inicia sesión en tu cuenta</p>
+        </div>
+
+        <!-- Mensaje de éxito -->
+        <div class="success-message" id="successMessage">
+            ✅ Login exitoso! Redirigiendo...
+        </div>
+
+        <!-- Formulario de login -->
+        <form id="loginForm">
+            <!-- Campo email -->
+            <div class="form-group">
+                <label for="email">Email o Usuario</label>
+                <input type="text" id="email" name="email" autocomplete="email" required>
+                <div class="error-message" id="emailError">Por favor ingresa un email válido</div>
+            </div>
+
+            <!-- Campo contraseña -->
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+                <span class="password-toggle" id="togglePassword">👁️</span>
+                <div class="error-message" id="passwordError">La contraseña debe tener al menos 6 caracteres</div>
+            </div>
+
+            <!-- Recordar y olvidar contraseña -->
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember"> Recordarme
+                </label>
+                <a href="#" class="forgot-password" id="forgotPassword">¿Olvidaste tu contraseña?</a>
+            </div>
+
+            <!-- Botón de login -->
+            <button type="submit" class="login-btn" id="loginBtn">
+                <div class="loading" id="loading"></div>
+                <span id="btnText">Iniciar Sesión</span>
+            </button>
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">
+            <span>o continúa con</span>
+        </div>
+
+        <!-- Login social -->
+        <div class="social-login">
+            <a href="#" class="social-btn" id="googleLogin">
+                🌐 Continuar con Google
+            </a>
+        </div>
+
+        <!-- Link de registro -->
+        <div class="register-link">
+            ¿No tienes cuenta? <a href="#" id="registerLink">Regístrate aquí</a>
+        </div>
+    </div>
+
+    <script>
+        // ===============================
+        //  VARIABLES GLOBALES
+        // ===============================
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const loginBtn = document.getElementById('loginBtn');
+        const loading = document.getElementById('loading');
+        const btnText = document.getElementById('btnText');
+        const successMessage = document.getElementById('successMessage');
+
+        // Usuarios demo para prueba
+        const demoUsers = [
+            { email: 'admin@test.com', password: '123456', name: 'Administrador' },
+            { email: 'user@test.com', password: 'password', name: 'Usuario Demo' },
+            { email: 'demo', password: 'demo', name: 'Usuario Demo' }
+        ];
+
+        // ===============================
+        //  FUNCIONES UTILITARIAS
+        // ===============================
+        
+        /**
+         * Muestra un mensaje de error en el campo especificado
+         * @param {string} field - ID del campo
+         * @param {string} message - Mensaje de error
+         */
+        function showError(field, message) {
+            const input = document.getElementById(field);
+            const errorDiv = document.getElementById(field + 'Error');
+            
+            input.classList.add('error');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+        }
+
+        /**
+         * Limpia los errores del campo especificado
+         * @param {string} field - ID del campo
+         */
+        function clearError(field) {
+            const input = document.getElementById(field);
+            const errorDiv = document.getElementById(field + 'Error');
+            
+            input.classList.remove('error');
+            errorDiv.style.display = 'none';
+        }
+
+        /**
+         * Valida si un email tiene formato correcto
+         * @param {string} email - Email a validar
+         * @returns {boolean} - True si es válido
+         */
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        /**
+         * Simula el proceso de autenticación
+         * @param {string} email - Email del usuario
+         * @param {string} password - Contraseña del usuario
+         * @returns {Promise} - Resultado de la autenticación
+         */
+        async function performLogin(email, password) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    const user = demoUsers.find(u => 
+                        (u.email.toLowerCase() === email.toLowerCase()) && u.password === password
+                    );
+                    
+                    if (user) {
+                        resolve({ success: true, user: user });
+                    } else {
+                        resolve({ success: false, message: 'Email o contraseña incorrectos' });
+                    }
+                }, 1500); // Simular delay de red
+            });
+        }
+
+        // ===============================
+        //  EVENT LISTENERS
+        // ===============================
+
+        // Toggle mostrar/ocultar contraseña
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.textContent = type === 'password' ? '👁️' : '🙈';
+        });
+
+        // Validación en tiempo real
+        emailInput.addEventListener('input', function() {
+            clearError('email');
+        });
+
+        passwordInput.addEventListener('input', function() {
+            clearError('password');
+        });
+
+        // Manejo del formulario de login
+        loginForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = emailInput.value.trim();
+            const password = passwordInput.value;
+            let hasErrors = false;
+
+            // Limpiar errores previos
+            clearError('email');
+            clearError('password');
+
+            // Validaciones
+            if (!email) {
+                showError('email', 'Por favor ingresa tu email o usuario');
+                hasErrors = true;
+            } else if (email.includes('@') && !isValidEmail(email)) {
+                showError('email', 'Por favor ingresa un email válido');
+                hasErrors = true;
+            }
+
+            if (!password) {
+                showError('password', 'Por favor ingresa tu contraseña');
+                hasErrors = true;
+            } else if (password.length < 3) {
+                showError('password', 'La contraseña debe tener al menos 3 caracteres');
+                hasErrors = true;
+            }
+
+            if (hasErrors) return;
+
+            // Mostrar estado de carga
+            loginBtn.disabled = true;
+            loading.style.display = 'inline-block';
+            btnText.textContent = 'Iniciando sesión...';
+
+            try {
+                const result = await performLogin(email, password);
+                
+                if (result.success) {
+                    // Login exitoso
+                    successMessage.style.display = 'block';
+                    btnText.textContent = '✅ ¡Éxito!';
+                    
+                    // Guardar sesión si "recordar" está marcado
+                    if (document.getElementById('remember').checked) {
+                        localStorage.setItem('rememberedUser', JSON.stringify({
+                            email: email,
+                            name: result.user.name
+                        }));
+                    }
+                    
+                    // Simular redirección
+                    setTimeout(() => {
+                        alert(`¡Bienvenido ${result.user.name}!\n\nEn un sitio real, serías redirigido al dashboard.`);
+                        // window.location.href = '/dashboard';
+                    }, 2000);
+                    
+                } else {
+                    // Login fallido
+                    showError('password', result.message);
+                }
+            } catch (error) {
+                showError('password', 'Error de conexión. Inténtalo de nuevo.');
+            } finally {
+                // Ocultar estado de carga
+                setTimeout(() => {
+                    loginBtn.disabled = false;
+                    loading.style.display = 'none';
+                    btnText.textContent = 'Iniciar Sesión';
+                }, 1000);
+            }
+        });
+
+        // ===============================
+        //  INICIALIZACIÓN
+        // ===============================
+
+        // Cargar usuario recordado al cargar la página
+        window.addEventListener('load', function() {
+            const rememberedUser = localStorage.getItem('rememberedUser');
+            if (rememberedUser) {
+                const user = JSON.parse(rememberedUser);
+                emailInput.value = user.email;
+                document.getElementById('remember').checked = true;
+            }
+        });
+
+        // ===============================
+        //  ENLACES ADICIONALES
+        // ===============================
+
+        // Recuperar contraseña
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Funcionalidad de recuperación de contraseña.\n\nEn un sitio real, esto abriría un formulario de recuperación.');
+        });
+
+        // Enlace de registro
+        document.getElementById('registerLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Funcionalidad de registro.\n\nEn un sitio real, esto te llevaría al formulario de registro.');
+        });
+
+        // Login con Google
+        document.getElementById('googleLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Login con Google.\n\nEn un sitio real, esto iniciaría el flujo OAuth de Google.');
+        });
+
+        // ===============================
+        //  INFORMACIÓN DE DESARROLLO
+        // ===============================
+        console.log('=== USUARIOS DE PRUEBA ===');
+        console.log('Email: admin@test.com | Contraseña: 123456');
+        console.log('Email: user@test.com | Contraseña: password');
+        console.log('Usuario: demo | Contraseña: demo');
+    </script>
+</body>
+</html>
