@@ -1,7 +1,6 @@
 /* Importar fuentes modernas */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* Variables CSS */
 :root {
     --primary-color: #667eea;
     --secondary-color: #764ba2;
@@ -34,7 +33,6 @@ body {
     color: var(--text-dark);
 }
 
-/* Navbar */
 .NavBar {
     position: fixed;
     top: 0;
