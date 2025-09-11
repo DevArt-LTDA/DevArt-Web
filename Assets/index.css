@@ -33,6 +33,12 @@ body {
     color: var(--text-dark);
 }
 
+/* Quitar efectos al logo navbar */
+.logo {
+
+
+}
+
 .NavBar {
     position: fixed;
     top: 0;
@@ -161,8 +167,17 @@ body {
 
 .cart-icon{
     position: absolute;
-    top: 15px;
+    top: 10px;
     right: 170px;
+    font-size: 1.5rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    transition: var(--transition);
+}
+.Login-icon{
+    position: absolute;
+    top: 10px;
+    right: 50px;
     font-size: 1.5rem;
     color: var(--text-dark);
     text-decoration: none;
@@ -480,3 +495,4 @@ footer::before {
         font-size: 1.1rem;
     }
 }
+
