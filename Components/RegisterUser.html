@@ -1,1 +1,641 @@
-    
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .register-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            max-width: 500px;
+            width: 100%;
+            margin: 20px;
+        }
+
+        .register-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .register-body {
+            padding: 40px;
+        }
+
+        .form-floating {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.25rem rgba(102, 126, 234, 0.25);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #6c757d;
+            z-index: 10;
+        }
+
+        .password-toggle:hover {
+            color: #495057;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+
+        .strength-weak { background: #dc3545; width: 25%; }
+        .strength-fair { background: #ffc107; width: 50%; }
+        .strength-good { background: #17a2b8; width: 75%; }
+        .strength-strong { background: #28a745; width: 100%; }
+
+        .form-check-input:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        .invalid-feedback {
+            display: block;
+        }
+
+        .valid-feedback {
+            display: block;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="register-container">
+            <div class="register-header">
+                <h2 class="mb-0">
+                    <i class="fas fa-user-plus me-2"></i>
+                    Crear Cuenta
+                </h2>
+                <p class="mb-0 mt-2 opacity-75">Únete a nuestra comunidad</p>
+            </div>
+
+            <div class="register-body">
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle me-2"></i>
+                    ¡Cuenta creada exitosamente! Ya puedes iniciar sesión.
+                </div>
+
+                <div class="error-message" id="errorMessage">
+                    <i class="fas fa-exclamation-circle me-2"></i>
+                    <span id="errorText">Hubo un error al crear la cuenta.</span>
+                </div>
+
+                <form id="registerForm" novalidate>
+                    <!-- Nombre completo -->
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="fullName" placeholder="Nombre completo" required>
+                        <label for="fullName">
+                            <i class="fas fa-user me-2"></i>Nombre completo
+                        </label>
+                        <div class="invalid-feedback" id="fullNameError"></div>
+                        <div class="valid-feedback">¡Nombre válido!</div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="email" placeholder="correo@ejemplo.com" required>
+                        <label for="email">
+                            <i class="fas fa-envelope me-2"></i>Email
+                        </label>
+                        <div class="invalid-feedback" id="emailError"></div>
+                        <div class="valid-feedback">¡Email válido!</div>
+                    </div>
+
+                    <!-- Teléfono -->
+                    <div class="form-floating">
+                        <input type="tel" class="form-control" id="phone" placeholder="+56 9 1234 5678">
+                        <label for="phone">
+                            <i class="fas fa-phone me-2"></i>Teléfono (opcional)
+                        </label>
+                        <div class="invalid-feedback" id="phoneError"></div>
+                    </div>
+
+                    <!-- País -->
+                    <div class="form-floating">
+                        <select class="form-select" id="country" required>
+                            <option value="">Selecciona tu país</option>
+                            <option value="CL">Chile</option>
+                            <option value="AR">Argentina</option>
+                            <option value="PE">Perú</option>
+                            <option value="CO">Colombia</option>
+                            <option value="MX">México</option>
+                            <option value="ES">España</option>
+                            <option value="US">Estados Unidos</option>
+                            <option value="other">Otro</option>
+                        </select>
+                        <label for="country">
+                            <i class="fas fa-globe me-2"></i>País
+                        </label>
+                        <div class="invalid-feedback" id="countryError"></div>
+                    </div>
+
+                    <!-- Contraseña -->
+                    <div class="form-floating position-relative">
+                        <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+                        <label for="password">
+                            <i class="fas fa-lock me-2"></i>Contraseña
+                        </label>
+                        <span class="password-toggle" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        <div class="invalid-feedback" id="passwordError"></div>
+                        <div class="strength-meter">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <small class="text-muted" id="strengthText">Fortaleza de la contraseña</small>
+                    </div>
+
+                    <!-- Confirmar contraseña -->
+                    <div class="form-floating position-relative">
+                        <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña" required>
+                        <label for="confirmPassword">
+                            <i class="fas fa-lock me-2"></i>Confirmar contraseña
+                        </label>
+                        <span class="password-toggle" id="toggleConfirmPassword">
+                            <i class="fas fa-eye"></i>
+                        </span>
+                        <div class="invalid-feedback" id="confirmPasswordError"></div>
+                        <div class="valid-feedback">¡Las contraseñas coinciden!</div>
+                    </div>
+
+                    <!-- Términos y condiciones -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            Acepto los <a href="#" class="text-decoration-none">Términos de Servicio</a> 
+                            y la <a href="#" class="text-decoration-none">Política de Privacidad</a>
+                        </label>
+                        <div class="invalid-feedback">Debes aceptar los términos para continuar</div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Quiero recibir noticias y promociones por email
+                        </label>
+                    </div>
+
+                    <!-- Botón de registro -->
+                    <button class="btn btn-register btn-primary w-100 mb-3" type="submit" id="registerBtn">
+                        <div class="loading-spinner me-2" id="loadingSpinner"></div>
+                        <span id="btnText">
+                            <i class="fas fa-user-plus me-2"></i>Crear Cuenta
+                        </span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="text-center mb-3">
+                        <small class="text-muted">o regístrate con</small>
+                    </div>
+
+                    <!-- Google signup -->
+                    <button type="button" class="btn btn-outline-secondary w-100 mb-3" id="googleSignup">
+                        <i class="fab fa-google me-2"></i>Continuar con Google
+                    </button>
+
+                    <!-- Link al login -->
+                    <div class="text-center">
+                        <small class="text-muted">
+                            ¿Ya tienes cuenta? 
+                            <a href="#" class="text-decoration-none" id="loginLink">Inicia sesión aquí</a>
+                        </small>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Variables globales
+        const USERS_KEY = 'registeredUsers';
+        
+        // Elementos del DOM
+        const form = document.getElementById('registerForm');
+        const fullName = document.getElementById('fullName');
+        const email = document.getElementById('email');
+        const phone = document.getElementById('phone');
+        const country = document.getElementById('country');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirmPassword');
+        const agreeTerms = document.getElementById('agreeTerms');
+        const newsletter = document.getElementById('newsletter');
+        const registerBtn = document.getElementById('registerBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const btnText = document.getElementById('btnText');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const strengthFill = document.getElementById('strengthFill');
+        const strengthText = document.getElementById('strengthText');
+
+        // Funciones utilitarias
+        function getUsers() {
+            return JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+        }
+
+        function saveUsers(users) {
+            localStorage.setItem(USERS_KEY, JSON.stringify(users));
+        }
+
+        function emailExists(email) {
+            const users = getUsers();
+            return users.some(user => user.email.toLowerCase() === email.toLowerCase());
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        function isValidName(name) {
+            return /^[a-zA-ZÁÉÍÓÚáéíóúñÑ\s]{2,50}$/.test(name.trim());
+        }
+
+        function isValidPhone(phone) {
+            return /^[\+]?[0-9\s\-\(\)]{8,20}$/.test(phone.trim());
+        }
+
+        function evaluatePasswordStrength(password) {
+            let score = 0;
+            
+            if (password.length >= 8) score += 1;
+            if (/[a-z]/.test(password)) score += 1;
+            if (/[A-Z]/.test(password)) score += 1;
+            if (/\d/.test(password)) score += 1;
+            if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) score += 1;
+
+            const levels = ['', 'weak', 'fair', 'good', 'strong'];
+            const texts = ['', 'Débil', 'Regular', 'Buena', 'Fuerte'];
+            
+            return {
+                level: levels[Math.min(score, 4)],
+                text: texts[Math.min(score, 4)],
+                score: score
+            };
+        }
+
+        function updatePasswordStrength(password) {
+            const strength = evaluatePasswordStrength(password);
+            
+            strengthFill.className = 'strength-fill';
+            if (password.length > 0 && strength.level) {
+                strengthFill.classList.add(`strength-${strength.level}`);
+                strengthText.textContent = `Fortaleza: ${strength.text}`;
+            } else {
+                strengthText.textContent = 'Fortaleza de la contraseña';
+            }
+        }
+
+        function showFieldError(field, message) {
+            field.classList.add('is-invalid');
+            field.classList.remove('is-valid');
+            const errorElement = document.getElementById(field.id + 'Error');
+            if (errorElement) {
+                errorElement.textContent = message;
+            }
+        }
+
+        function showFieldSuccess(field) {
+            field.classList.add('is-valid');
+            field.classList.remove('is-invalid');
+        }
+
+        function clearFieldValidation(field) {
+            field.classList.remove('is-valid', 'is-invalid');
+        }
+
+        function showMessage(type, message) {
+            const messageElement = type === 'success' ? successMessage : errorMessage;
+            const otherElement = type === 'success' ? errorMessage : successMessage;
+            
+            otherElement.style.display = 'none';
+            messageElement.style.display = 'block';
+            
+            if (type === 'error') {
+                document.getElementById('errorText').textContent = message;
+            }
+            
+            setTimeout(() => {
+                messageElement.style.display = 'none';
+            }, 5000);
+        }
+
+        async function registerUser(userData) {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    try {
+                        if (emailExists(userData.email)) {
+                            resolve({ success: false, message: 'Este email ya está registrado' });
+                            return;
+                        }
+                        
+                        const users = getUsers();
+                        const newUser = {
+                            id: Date.now(),
+                            fullName: userData.fullName,
+                            email: userData.email,
+                            phone: userData.phone || null,
+                            country: userData.country,
+                            password: userData.password, // En producción usar hash
+                            newsletter: userData.newsletter,
+                            createdAt: new Date().toISOString()
+                        };
+                        
+                        users.push(newUser);
+                        saveUsers(users);
+                        
+                        resolve({ success: true, user: newUser });
+                    } catch (error) {
+                        resolve({ success: false, message: 'Error al crear la cuenta' });
+                    }
+                }, 1500);
+            });
+        }
+
+        // Event Listeners
+        
+        // Toggle password visibility
+        document.getElementById('togglePassword').addEventListener('click', () => {
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            document.querySelector('#togglePassword i').className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        document.getElementById('toggleConfirmPassword').addEventListener('click', () => {
+            const type = confirmPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            confirmPassword.setAttribute('type', type);
+            document.querySelector('#toggleConfirmPassword i').className = type === 'password' ? 'fas fa-eye' : 'fas fa-eye-slash';
+        });
+
+        // Validación en tiempo real
+        fullName.addEventListener('input', () => {
+            const name = fullName.value.trim();
+            if (name.length === 0) {
+                clearFieldValidation(fullName);
+            } else if (isValidName(name)) {
+                showFieldSuccess(fullName);
+            } else {
+                showFieldError(fullName, 'El nombre debe tener entre 2-50 caracteres y solo letras');
+            }
+        });
+
+        email.addEventListener('input', () => {
+            const emailValue = email.value.trim();
+            if (emailValue.length === 0) {
+                clearFieldValidation(email);
+            } else if (!isValidEmail(emailValue)) {
+                showFieldError(email, 'Por favor ingresa un email válido');
+            } else if (emailExists(emailValue)) {
+                showFieldError(email, 'Este email ya está registrado');
+            } else {
+                showFieldSuccess(email);
+            }
+        });
+
+        phone.addEventListener('input', () => {
+            const phoneValue = phone.value.trim();
+            if (phoneValue.length === 0) {
+                clearFieldValidation(phone);
+            } else if (isValidPhone(phoneValue)) {
+                showFieldSuccess(phone);
+            } else {
+                showFieldError(phone, 'Por favor ingresa un teléfono válido');
+            }
+        });
+
+        password.addEventListener('input', () => {
+            const passwordValue = password.value;
+            updatePasswordStrength(passwordValue);
+            
+            if (passwordValue.length === 0) {
+                clearFieldValidation(password);
+            } else if (passwordValue.length < 6) {
+                showFieldError(password, 'La contraseña debe tener al menos 6 caracteres');
+            } else {
+                showFieldSuccess(password);
+            }
+            
+            // Revalidar confirmación si ya tiene valor
+            if (confirmPassword.value) {
+                validatePasswordConfirmation();
+            }
+        });
+
+        confirmPassword.addEventListener('input', validatePasswordConfirmation);
+
+        function validatePasswordConfirmation() {
+            const passwordValue = password.value;
+            const confirmValue = confirmPassword.value;
+            
+            if (confirmValue.length === 0) {
+                clearFieldValidation(confirmPassword);
+            } else if (passwordValue === confirmValue) {
+                showFieldSuccess(confirmPassword);
+            } else {
+                showFieldError(confirmPassword, 'Las contraseñas no coinciden');
+            }
+        }
+
+        country.addEventListener('change', () => {
+            if (country.value) {
+                showFieldSuccess(country);
+            } else {
+                showFieldError(country, 'Por favor selecciona tu país');
+            }
+        });
+
+        // Manejo del formulario
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Validar todos los campos
+            let isValid = true;
+            
+            if (!fullName.value.trim() || !isValidName(fullName.value.trim())) {
+                showFieldError(fullName, 'Por favor ingresa un nombre válido');
+                isValid = false;
+            }
+            
+            if (!email.value.trim() || !isValidEmail(email.value.trim())) {
+                showFieldError(email, 'Por favor ingresa un email válido');
+                isValid = false;
+            } else if (emailExists(email.value.trim())) {
+                showFieldError(email, 'Este email ya está registrado');
+                isValid = false;
+            }
+            
+            if (phone.value.trim() && !isValidPhone(phone.value.trim())) {
+                showFieldError(phone, 'Por favor ingresa un teléfono válido');
+                isValid = false;
+            }
+            
+            if (!country.value) {
+                showFieldError(country, 'Por favor selecciona tu país');
+                isValid = false;
+            }
+            
+            if (!password.value || password.value.length < 6) {
+                showFieldError(password, 'La contraseña debe tener al menos 6 caracteres');
+                isValid = false;
+            }
+            
+            if (password.value !== confirmPassword.value) {
+                showFieldError(confirmPassword, 'Las contraseñas no coinciden');
+                isValid = false;
+            }
+            
+            if (!agreeTerms.checked) {
+                agreeTerms.classList.add('is-invalid');
+                isValid = false;
+            } else {
+                agreeTerms.classList.remove('is-invalid');
+            }
+            
+            if (!isValid) return;
+            
+            // Mostrar loading
+            registerBtn.disabled = true;
+            loadingSpinner.style.display = 'inline-block';
+            btnText.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creando cuenta...';
+            
+            try {
+                const userData = {
+                    fullName: fullName.value.trim(),
+                    email: email.value.trim(),
+                    phone: phone.value.trim(),
+                    country: country.value,
+                    password: password.value,
+                    newsletter: newsletter.checked
+                };
+                
+                const result = await registerUser(userData);
+                
+                if (result.success) {
+                    showMessage('success', '¡Cuenta creada exitosamente!');
+                    form.reset();
+                    clearAllValidations();
+                    btnText.innerHTML = '<i class="fas fa-check me-2"></i>¡Cuenta creada!';
+                } else {
+                    showMessage('error', result.message);
+                }
+            } catch (error) {
+                showMessage('error', 'Error al crear la cuenta. Inténtalo de nuevo.');
+            } finally {
+                setTimeout(() => {
+                    registerBtn.disabled = false;
+                    loadingSpinner.style.display = 'none';
+                    btnText.innerHTML = '<i class="fas fa-user-plus me-2"></i>Crear Cuenta';
+                }, 1000);
+            }
+        });
+
+        function clearAllValidations() {
+            const fields = [fullName, email, phone, country, password, confirmPassword];
+            fields.forEach(field => clearFieldValidation(field));
+            agreeTerms.classList.remove('is-invalid');
+            strengthText.textContent = 'Fortaleza de la contraseña';
+            strengthFill.className = 'strength-fill';
+        }
+
+        // Google signup
+        document.getElementById('googleSignup').addEventListener('click', () => {
+            alert('Funcionalidad de Google SignUp.\n\nEn un sitio real, esto iniciaría el flujo OAuth de Google.');
+        });
+
+        // Login link
+        document.getElementById('loginLink').addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('Redirigir al formulario de login.\n\nEn un sitio real, esto te llevaría a la página de inicio de sesión.');
+        });
+
+        // Información de desarrollo
+        console.log('=== FORMULARIO DE REGISTRO ===');
+        console.log('Los usuarios se guardan en localStorage con la clave:', USERS_KEY);
+        console.log('Puedes verificar los usuarios registrados en las herramientas de desarrollador.');
+    </script>
+</body>
+</html>
