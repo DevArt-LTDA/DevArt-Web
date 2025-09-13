@@ -1,43 +1,107 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="Assets/brilliance.svg">
-    <link rel="stylesheet" href="../Assets/Shop.css">
-    <title>DevArt</title>
+    <meta name="description" content="DevArt - Productos y servicios de tecnología avanzada para impulsar tu negocio">
+    <link rel="icon" type="image/x-icon" href="../img/DevArt.png" />
+    <link rel="stylesheet" href="../Assets/Products.css">
+    <title>DevArt - Productos</title>
 </head>
 <body>
     <div class="NavBar">
-        <a href="../index.html">Home</a>
-        <a href="Products.html">Productos</a>
-        <a href="Blog.html">Blogs</a>
-        <a href="AboutUs.html">Nosotros</a>
-        <a href="Contact.html">Contacto</a>
-        <a href="Shop.html">Carrito</a>
+      <!-- Logo a la izquierda del home y quitarle efectos de boton -->
+      <div class="logo" style="position: absolute; left: 50px; top: 10px;">
+        <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
+      </div>
+      <a href="../index.html">Home</a>
+      <a href="../Components/Products.html">Productos</a>
+      <a href="../Components/AboutUs.html">Nosotros</a>
+      <a href="../Components/Contact.html">Contacto</a>
+
+      <!-- carrito de compras -->
+      <div class="cart-icon">
+        <a href="Cart.html">
+          <img src="../img/icon-cart.png" alt="Cart" width="30px" />
+          <span class="cart-count">0</span>
+        </a>
+      </div>
+
+      <!-- carrito de compras -->
+      <div class="Login-icon">
+        <a href="LoginUser.html">
+          <img src="../img/Login-user-icon.png" alt="Login" width="30px" />
+          <span class="Login-text" style="position: relative; top: -10px;">Login</span>
+        </a>
+      </div>
     </div>
 
+    <div class="container">
+        <div class="TituloProductos">
+            <h1>Nuestros Productos</h1>
+            <p>Descubre nuestros servicios de tecnología avanzada diseñados para impulsar tu negocio</p>
+        </div>
 
-<!-- CARRITO PARA EL PRODUCTO-->
-    
+        <div class="CarruselShop">
+            <div class="carousel-itemShop producto" data-id="1" data-nombre="Servicio de BIGDATA" data-precio="50000">
+                <div class="product-image">
+                    <img src="../img/ChatGPTbigdata.png" alt="Servicio de BIGDATA" />
+                    <div class="product-overlay">
+                        <span class="product-price">$50.000</span>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Servicio de BIGDATA</h3>
+                    <p class="product-description">Análisis avanzado de grandes volúmenes de datos para generar insights valiosos para tu empresa.</p>
+                    <div class="product-features">
+                        <span class="feature">📊 Análisis Predictivo</span>
+                        <span class="feature">🔍 Data Mining</span>
+                        <span class="feature">📈 Visualización</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
 
-<div class="CarruselShop">
-    <div class="carousel-itemShop1 producto" data-id="1" data-nombre="Servicio de BIGDATA" data-precio="50000">
-        <img src="img/ChatGPTbigdata.png" alt="DevArt Image s1" />
-        <div class="caption">Servicio de BIGDATA</div>
-        <button class="add-to-cart">Agregar al carrito</button>
+            <div class="carousel-itemShop producto" data-id="2" data-nombre="Desarrollo Web Art-Técnico" data-precio="80000">
+                <div class="product-image">
+                    <img src="../img/ChatGPTdevweb.png" alt="Desarrollo Web Art-Técnico" />
+                    <div class="product-overlay">
+                        <span class="product-price">$80.000</span>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Desarrollo Web Art-Técnico</h3>
+                    <p class="product-description">Creación de sitios web modernos y funcionales con diseño artístico y tecnología de vanguardia.</p>
+                    <div class="product-features">
+                        <span class="feature">🎨 Diseño Moderno</span>
+                        <span class="feature">📱 Responsive</span>
+                        <span class="feature">⚡ Optimizado</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+
+            <div class="carousel-itemShop producto" data-id="3" data-nombre="Análisis de Datos" data-precio="60000">
+                <div class="product-image">
+                    <img src="../img/ChatGPTanalisisdata.png" alt="Análisis de Datos" />
+                    <div class="product-overlay">
+                        <span class="product-price">$60.000</span>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Análisis de Datos</h3>
+                    <p class="product-description">Transformamos tus datos en información estratégica para la toma de decisiones inteligentes.</p>
+                    <div class="product-features">
+                        <span class="feature">📋 Reportes</span>
+                        <span class="feature">🎯 KPIs</span>
+                        <span class="feature">💡 Insights</span>
+                    </div>
+                    <button class="add-to-cart">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="carousel-itemShop2 producto" data-id="2" data-nombre="Desarrollo Web Art-Técnico" data-precio="80000">
-        <img src="img/ChatGPTdevweb.png" alt="DevArt Image s2" />
-        <div class="caption">Desarrollo Web Art-Técnico</div>
-        <button class="add-to-cart">Agregar al carrito</button>
-    </div>
-
-    <div class="carousel-itemShop3 producto" data-id="3" data-nombre="Analisis de Datos" data-precio="60000">
-        <img src="img/ChatGPTanalisisdata.png" alt="DevArt Image s3" />
-        <div class="caption">Analisis de Datos</div>
-        <button class="add-to-cart">Agregar al carrito</button>
-    </div>
-</div>
+    <script src="../script.js"></script>
+</body>
