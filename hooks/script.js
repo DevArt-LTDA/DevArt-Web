@@ -1,25 +1,27 @@
 // DevArt - Funcionalidad del Carrito de Compras
 document.addEventListener('DOMContentLoaded', function() {
-    // Array para almacenar productos del carrito
-    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    // Array para almacenar productos del carrito (compatible con Cart.js)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
     
     // Función para agregar productos al carrito
-    function agregarAlCarrito(id, nombre, precio) {
-        const productoExistente = carrito.find(item => item.id === id);
+    function agregarAlCarrito(id, nombre, precio, imagen = '') {
+        const productoExistente = cart.find(item => item.id === id);
         
         if (productoExistente) {
-            productoExistente.cantidad += 1;
+            productoExistente.quantity += 1;
         } else {
-            carrito.push({
+            cart.push({
                 id: id,
-                nombre: nombre,
-                precio: precio,
-                cantidad: 1
+                name: nombre,
+                price: precio,
+                quantity: 1,
+                image: imagen,
+                category: 'Servicios'
             });
         }
         
         // Guardar en localStorage
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        localStorage.setItem('cart', JSON.stringify(cart));
         
         // Mostrar mensaje de confirmación
         mostrarMensajeConfirmacion(nombre);
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function actualizarContadorCarrito() {
         const contador = document.querySelector('.cart-count');
         if (contador) {
-            const totalItems = carrito.reduce((total, item) => total + item.cantidad, 0);
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             contador.textContent = totalItems;
             contador.style.display = totalItems > 0 ? 'inline' : 'none';
         }
@@ -95,38 +97,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const nombre = producto.dataset.nombre;
             const precio = parseInt(producto.dataset.precio);
             
+            // Obtener la imagen del producto
+            const imagenElement = producto.querySelector('img');
+            const imagen = imagenElement ? imagenElement.src : '../img/ChatGPTdevweb.png';
+            
             // Agregar efecto visual al botón
             this.style.transform = 'scale(0.95)';
             setTimeout(() => {
                 this.style.transform = 'scale(1)';
             }, 150);
             
-            agregarAlCarrito(id, nombre, precio);
+            agregarAlCarrito(id, nombre, precio, imagen);
         });
     });
     
     // Función para obtener productos del carrito
     function obtenerCarrito() {
-        return carrito;
+        return cart;
     }
     
     // Función para limpiar carrito
     function limpiarCarrito() {
-        carrito = [];
-        localStorage.removeItem('carrito');
+        cart = [];
+        localStorage.removeItem('cart');
         actualizarContadorCarrito();
     }
     
     // Función para remover producto del carrito
     function removerDelCarrito(id) {
-        carrito = carrito.filter(item => item.id !== id);
-        localStorage.setItem('carrito', JSON.stringify(carrito));
+        cart = cart.filter(item => item.id !== id);
+        localStorage.setItem('cart', JSON.stringify(cart));
         actualizarContadorCarrito();
     }
     
     // Función para calcular total del carrito
     function calcularTotal() {
-        return carrito.reduce((total, item) => total + (item.precio * item.cantidad), 0);
+        return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
     }
     
     // Exponer funciones globalmente para uso en otras páginas
