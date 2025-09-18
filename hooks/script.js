@@ -28,9 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Función para mostrar mensaje de confirmación
     function mostrarMensajeConfirmacion(nombreProducto) {
-        // Crear elemento de mensaje
         const mensaje = document.createElement('div');
-        mensaje.className = 'mensaje-confirmacion';
         mensaje.innerHTML = `
             <div class="mensaje-contenido">
                 <span class="texto">${nombreProducto} agregado al carrito</span>
@@ -180,9 +178,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Función para formatear precios en pesos colombianos
 function formatearPrecio(precio) {
-    return new Intl.NumberFormat('es-CO', {
+    return new Intl.NumberFormat('es-CLP', {
         style: 'currency',
-        currency: 'COP',
+        currency: 'CLP',
         minimumFractionDigits: 0
     }).format(precio);
 }
