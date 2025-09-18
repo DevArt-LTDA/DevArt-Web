@@ -1,36 +1,241 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="Assets/brilliance.svg">
+    <link rel="icon" type="image/x-icon" href="../Assets/brilliance.svg">
     <link rel="stylesheet" href="../Assets/Blog.css">
-    <title>DevArt</title>
+    <title>Blog - DevArt</title>
 </head>
 <body>
-    <div class="NavBar">
+    <header>
+        <div class="NavBar">
+            <div class="logo" style="position: absolute; left: 50px; top: 10px;">
+                <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
+            </div>
+            <a href="../index.html">Home</a>
+            <a href="../Components/Products.html">Productos</a>
+            <a href="../Components/AboutUs.html">Nosotros</a>   
+            <a href="../Components/Blog.html">Blog</a>
+            <a href="../Components/Contact.html">Contacto</a>
+            <div class="cart-icon">
+                <a href="../Components/Cart.html">
+                    <img src="../img/icon-cart.png" alt="Cart" width="30px" />
+                    <span class="cart-count">0</span>
+                </a>
+            </div> 
+        </div>
+    </header>
 
-      <div class="logo" style="position: absolute; left: 50px; top: 10px;">
-        <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
-      </div>
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Blog DevArt</h1>
+            <p class="hero-subtitle">Explorando la intersección entre código y creatividad</p>
 
-      <a href="../index.html">Home</a>
-      <a href="../Components/Products.html">Productos</a>
-      <a href="../Components/AboutUs.html">Nosotros</a>   
-      <a href="../Components/Blog.html">Blog</a>
-      <a href="../Components/Contact.html">Contacto</a>
-      <!-- carrito de compras -->
-      <div class="cart-icon">
-        <a href="Components/Cart.html">
-          <img src="../img/icon-cart.png" alt="Cart" width="30px" />
-          <span class="cart-count">0</span>
-        </a>
-      </div> 
+        </div>
+        <div class="hero-background"></div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Featured Article -->
+        <section class="featured-section">
+            <div class="featured-badge">⭐ Artículo Destacado</div>
+            <article class="featured-article">
+                <div class="featured-image">
+                    <img src="../img/ChatGPTdevweb.png" alt="Desarrollo Web con IA">
+                    <div class="image-overlay">
+                        <span class="read-time">5 min lectura</span>
+                    </div>
+                </div>
+                <div class="featured-content">
+                    <div class="article-meta">
+                        <span class="category">Desarrollo</span>
+                        <span class="date">15 Sep 2025</span>
+                    </div>
+                    <h2 class="featured-title">El Futuro del Desarrollo Web: IA y Creatividad</h2>
+                    <p class="featured-excerpt">
+                        Descubre cómo la inteligencia artificial está revolucionando el desarrollo web y 
+                        cómo los desarrolladores pueden aprovechar estas herramientas para crear experiencias 
+                        más creativas e innovadoras.
+                    </p>
+                    <a href="#" class="read-more-btn">Leer Artículo Completo</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Blog Grid -->
+        <section class="blog-grid">
+            <!-- Article 1 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/ChatGPTbigdata.png" alt="Big Data y Arte">
+                    <div class="category-tag">Data Science</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">DevArt Team</span>
+                        <span class="date">12 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Visualización de Datos como Arte Digital</h3>
+                    <p class="card-excerpt">
+                        Exploramos cómo convertir conjuntos de datos complejos en obras de arte 
+                        visualmente impactantes usando técnicas modernas de visualización.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">Data Viz</span>
+                        <span class="tag">D3.js</span>
+                        <span class="tag">Arte</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/ChatGPTanalisisdata.png" alt="Análisis de Datos">
+                    <div class="category-tag">Analytics</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">Creative Coder</span>
+                        <span class="date">10 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Machine Learning en el Arte Generativo</h3>
+                    <p class="card-excerpt">
+                        Cómo los algoritmos de machine learning están creando nuevas formas 
+                        de expresión artística y revolucionando el arte digital.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">ML</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">Generativo</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/CreativeCode.jpg" alt="Código Creativo">
+                    <div class="category-tag">Creative Coding</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">Innovation Lab</span>
+                        <span class="date">8 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Programación Creativa con p5.js</h3>
+                    <p class="card-excerpt">
+                        Introducción a p5.js y cómo esta poderosa librería puede ayudarte 
+                        a crear arte interactivo y animaciones impresionantes.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">p5.js</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Interactivo</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/Minimalist.jpg" alt="Diseño Minimalista">
+                    <div class="category-tag">UI/UX</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">UX Designer</span>
+                        <span class="date">5 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Minimalismo en el Diseño Digital</h3>
+                    <p class="card-excerpt">
+                        Los principios del diseño minimalista aplicados al desarrollo de 
+                        interfaces digitales modernas y efectivas.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">UI</span>
+                        <span class="tag">CSS</span>
+                        <span class="tag">Minimalismo</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/UICONCEPTS.jpg" alt="Conceptos UI">
+                    <div class="category-tag">Design</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">Design Team</span>
+                        <span class="date">3 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Tendencias en UI Design 2025</h3>
+                    <p class="card-excerpt">
+                        Las últimas tendencias en diseño de interfaces que están marcando 
+                        el rumbo del diseño digital este año.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">Trends</span>
+                        <span class="tag">UI</span>
+                        <span class="tag">2025</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="blog-card">
+                <div class="card-image">
+                    <img src="../img/DevArt.png" alt="DevArt Platform">
+                    <div class="category-tag">DevArt</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-meta">
+                        <span class="author">DevArt Team</span>
+                        <span class="date">1 Sep 2025</span>
+                    </div>
+                    <h3 class="card-title">Construyendo una Comunidad Creativa</h3>
+                    <p class="card-excerpt">
+                        La historia detrás de DevArt y cómo estamos creando un espacio 
+                        único para desarrolladores y artistas digitales.
+                    </p>
+                    <div class="card-tags">
+                        <span class="tag">Community</span>
+                        <span class="tag">Platform</span>
+                        <span class="tag">Story</span>
+                    </div>
+                    <a href="#" class="card-link">Leer más →</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section">
+            <div class="newsletter-content">
+                <h3 class="newsletter-title">Mantente al Día</h3>
+                <p class="newsletter-text">
+                    Suscríbete a nuestro newsletter y recibe las últimas tendencias en 
+                    desarrollo creativo y arte digital directamente en tu bandeja de entrada.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="tu-email@ejemplo.com" class="newsletter-input">
+                    <button type="submit" class="newsletter-btn">Suscribirse</button>
+                </form>
+
+            </div>
+        </section>
+
+     
     </div>
-
-     <!-- Revisar si este carrito sirve mas --> 
-    
-
 
     <footer>
         <div class="footer-content">
@@ -50,5 +255,7 @@
             <p>&copy; 2025 DevArt. Todos los derechos reservados.</p>
         </div>
     </footer>
+            <script src="../hooks/script.js"></script>
+
 </body>
 </html>

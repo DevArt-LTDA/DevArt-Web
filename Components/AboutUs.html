@@ -19,30 +19,111 @@
             <a href="../Components/Blog.html">Blog</a>
             <a href="../Components/Contact.html">Contacto</a>
             <div class="cart-icon">
-                <a href="Components/Cart.html">
+                <a href="../Components/Cart.html">
                 <img src="../img/icon-cart.png" alt="Cart" width="30px" />
                 <span class="cart-count">0</span>
                 </a>
             </div> 
         </div>
     </header>
-    <div class="container-banner">
-        <h1>Sobre Nosotros</h1>
-        <p>Conectando desarrolladores con el arte.</p>
-        <img src="../img/Banner_Nosotros.jpg" class="banner-image" alt="Banner Nosotros">
-        <a href="../index.html">Home</a>
-        <a href="../Components/Products.html">Productos</a>
-        <a href="../Components/AboutUs.html">Nosotros</a>
-        <a href="../Components/Contact.html">Contacto</a>
-    </div>
-    <div class="content">  
-          <h2>Nuestra Misión</h2>
-            <p>En DevArt, nuestra misión es proporcionar una plataforma donde los desarrolladores puedan descubrir, compartir y adquirir arte digital creado por otros desarrolladores. 
-               Creemos en la fusión de la tecnología y la creatividad para inspirar y empoderar a la comunidad de desarrolladores.</p>
-            <h2>Nuestro Equipo</h2>
-            <p>Somos un equipo apasionado de desarrolladores y artistas que entienden las necesidades y aspiraciones de nuestra comunidad. Trabajamos juntos para crear un espacio donde el arte y la tecnología se encuentren.</p>
-            <h2>Únete a Nosotros</h2>
-            <p>Si eres un desarrollador con talento artístico o simplemente alguien que aprecia el arte digital, te invitamos a unirte a nuestra comunidad. Juntos, podemos hacer de DevArt el lugar definitivo para el arte de desarrolladores.</p>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Sobre Nosotros</h1>
+                <p class="hero-subtitle">Conectando desarrolladores con el arte digital del futuro</p>
+
+            </div>
+        </div>
+        <div class="hero-image-container">
+            <img src="../img/Banner_Nosotros.jpg" class="hero-image" alt="Banner Nosotros">
+            <div class="image-overlay"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <section class="about-content">
+            <!-- Mission Section -->
+            <div class="content-card mission-card">
+                <div class="card-icon"></div>
+                <h2 class="section-title">Nuestra Misión</h2>
+                <p class="section-text">
+                    En DevArt, nuestra misión es proporcionar una plataforma donde los desarrolladores puedan descubrir, 
+                    compartir y adquirir arte digital creado por otros desarrolladores. Creemos en la fusión de la 
+                    tecnología y la creatividad para inspirar y empoderar a la comunidad de desarrolladores.
+                </p>
+                <div class="card-decoration"></div>
+            </div>
+
+            <!-- Team Section -->
+            <div class="content-card team-card">
+                <div class="card-icon"></div>
+                <h2 class="section-title">Nuestro Equipo</h2>
+                <p class="section-text">
+                    Somos un equipo apasionado de desarrolladores y artistas que entienden las necesidades y aspiraciones 
+                    de nuestra comunidad. Trabajamos juntos para crear un espacio donde el arte y la tecnología se encuentren.
+                </p>
+                <div class="team-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Desarrolladores</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Obras de Arte</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">20+</span>
+                        <span class="stat-label">Artistas</span>
+                    </div>
+                </div>
+                <div class="card-decoration"></div>
+            </div>
+
+            <!-- Join Us Section -->
+            <div class="content-card join-card">
+                <div class="card-icon"></div>
+                <h2 class="section-title">Únete a Nosotros</h2>
+                <p class="section-text">
+                    Si eres un desarrollador con talento artístico o simplemente alguien que aprecia el arte digital, 
+                    te invitamos a unirte a nuestra comunidad. Juntos, podemos hacer de DevArt el lugar definitivo 
+                    para el arte de desarrolladores.
+                </p>
+                <div class="cta-buttons">
+                    <a href="../Components/RegisterUser.html" class="cta-button primary">Crear Cuenta</a>
+                    <a href="../Components/Products.html" class="cta-button secondary">Ver Productos</a>
+                </div>
+                <div class="card-decoration"></div>
+            </div>
+
+            <!-- Values Section -->
+            <div class="values-section">
+                <h2 class="values-title">Nuestros Valores</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon"></div>
+                        <h3>Innovación</h3>
+                        <p>Impulsamos la creatividad tecnológica</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"></div>
+                        <h3>Calidad</h3>
+                        <p>Excelencia en cada obra de arte</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"></div>
+                        <h3>Comunidad</h3>
+                        <p>Conectamos talentos globalmente</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon"></div>
+                        <h3>Confianza</h3>
+                        <p>Seguridad y transparencia</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <footer>
         <div class="footer-content">
@@ -62,5 +143,7 @@
             <p>&copy; 2025 DevArt. Todos los derechos reservados.</p>
         </div>
     </footer>
+            <script src="../hooks/script.js"></script>
+
 </body>
 </html>

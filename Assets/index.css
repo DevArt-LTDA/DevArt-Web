@@ -130,7 +130,6 @@ body {
 }
 
 .TituloHome::after {
-    content: '🚀';
     position: absolute;
     top: 1rem;
     right: 2rem;

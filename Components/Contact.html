@@ -1,32 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="Assets/brilliance.svg">
+    <link rel="icon" type="image/x-icon" href="../Assets/brilliance.svg">
     <link rel="stylesheet" href="../Assets/Contact.css">
-    <title>DevArt</title>
+    <title>Contacto - DevArt</title>
 </head>
 <body>
- <div class="NavBar">
+    <header>
+        <div class="NavBar">
+            <div class="logo" style="position: absolute; left: 50px; top: 10px;">
+                <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
+            </div>
+            <a href="../index.html">Home</a>
+            <a href="../Components/Products.html">Productos</a>
+            <a href="../Components/AboutUs.html">Nosotros</a>   
+            <a href="../Components/Blog.html">Blog</a>
+            <a href="../Components/Contact.html">Contacto</a>
+            <div class="cart-icon">
+                <a href="../Components/Cart.html">
+                    <img src="../img/icon-cart.png" alt="Cart" width="30px" />
+                    <span class="cart-count">0</span>
+                </a>
+            </div> 
 
-      <div class="logo" style="position: absolute; left: 50px; top: 10px;">
-        <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
-      </div>
-      <a href="../index.html">Home</a>
-      <a href="../Components/Products.html">Productos</a>
-      <a href="../Components/AboutUs.html">Nosotros</a>   
-      <a href="../Components/Blog.html">Blog</a>
-      <a href="../Components/Contact.html">Contacto</a>
-      <div class="cart-icon">
-        <a href="../Components/Cart.html">
-          <img src="../img/icon-cart.png" alt="Cart" width="30px" />
-          <span class="cart-count">0</span>
-        </a>
-      </div> 
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Contacto</h1>
+            <p class="hero-subtitle">¿Tienes alguna pregunta? Estamos aquí para ayudarte</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Contact Form Section -->
+        <section class="contact-section">
+            <div class="contact-grid">
+                <!-- Contact Form -->
+                <div class="form-container">
+                    <h2 class="form-title">Enviar Mensaje</h2>
+                    
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Tu nombre" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="tu-email@ejemplo.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Asunto</label>
+                            <select id="subject" name="subject" class="form-select" required>
+                                <option value="">Selecciona un asunto</option>
+                                <option value="general">Consulta General</option>
+                                <option value="support">Soporte</option>
+                                <option value="partnership">Colaboración</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensaje</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Tu mensaje..." rows="5" required></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar</button>
+                    </form>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="info-card">
+                        <h3 class="info-title">Email</h3>
+                        <p class="info-text">contact@devart.com</p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3 class="info-title">Horarios</h3>
+                        <p class="info-text">
+                            Lunes - Viernes: 9:00 - 9:05<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
-    
     <footer>
         <div class="footer-content">
             <div class="footer">
@@ -45,5 +112,7 @@
             <p>&copy; 2025 DevArt. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script src="../hooks/script.js"></script>
 </body>
 </html>
