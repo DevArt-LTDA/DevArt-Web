@@ -4,45 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="../Assets/IconDevArt.png">
+        <link rel="icon" type="image/x-icon" href="../img/DevArt.png" />
+
     <link rel="stylesheet" href="../Assets/Cart.css">
     <title>DevArt - Carrito de Compras</title>
 </head>
 <body>
-    <div class="NavBar">
-        <!-- Logo a la izquierda del home y quitarle efectos de boton -->
+ <div class="NavBar">
+
       <div class="logo" style="position: absolute; left: 50px; top: 10px;">
         <img src="../img/IconDevArt.png" alt="DevArt Logo" width="50px" />
       </div>
-        <a href="../index.html">Home</a>
-        <a href="Products.html">Productos</a>
-        <a href="Blog.html">Blogs</a>
-        <a href="AboutUs.html">Nosotros</a>
-        <a href="Contact.html">Contacto</a>
-        <a href="Cart.html"> </a>
-
+      <a href="../index.html">Home</a>
+      <a href="../Components/Products.html">Productos</a>
+      <a href="../Components/AboutUs.html">Nosotros</a>   
+      <a href="../Components/Blog.html">Blog</a>
+      <a href="../Components/Contact.html">Contacto</a>
+      <div class="cart-icon">
+        <a href="../Components/Cart.html">
+          <img src="../img/icon-cart.png" alt="Cart" width="30px" />
+          <span class="cart-count">0</span>
+        </a>
+      </div> 
     </div>
 
     <div class="container">
-        <!-- Header del carrito -->
         <div class="cart-header">
             <h1>🛒 Mi Carrito</h1>
             <p>Revisa y gestiona tus productos seleccionados</p>
         </div>
-
-        <!-- Contenido del carrito -->
         <div class="cart-content">
-            <!-- Carrito vacío -->
             <div class="empty-cart" id="emptyCart">
-                <div class="empty-cart-icon">🛒</div>
+                <div class="empty-cart-icon"></div>
                 <h3>Tu carrito está vacío</h3>
                 <p>¡Agrega algunos productos increíbles para empezar!</p>
                 <a href="Products.html" class="continue-shopping-btn">
-                    <span>🛍️</span>
+                    <span></span>
                     Continuar Comprando
                 </a>
             </div>
-
-            <!-- Lista de productos -->
             <div class="cart-items" id="cartItems" style="display: none;">
                 <div class="cart-items-header">
                     <span>Producto</span>
@@ -52,50 +52,34 @@
                     <span>Acciones</span>
                 </div>
                 <div class="cart-items-list" id="cartItemsList">
-                    <!-- Los productos se cargarán dinámicamente aquí -->
                 </div>
             </div>
-
-            <!-- Resumen del carrito -->
-            <div class="cart-summary" id="cartSummary" style="display: none;">
-                <div class="summary-card">
+            <div class="summary-card">
+                    <div class="cart-summary" id="cartSummary" style="display: none;">
                     <h3>Resumen del Pedido</h3>
-                    
                     <div class="summary-line">
                         <span>Subtotal:</span>
                         <span id="subtotal">$0</span>
                     </div>
-                    
                     <div class="summary-line">
                         <span>Descuento:</span>
                         <span id="discount" class="discount-amount">-$0</span>
                     </div>
-                    
                     <div class="summary-line">
                         <span>Envío:</span>
                         <span id="shipping">Gratis</span>
                     </div>
-                    
                     <div class="summary-line total-line">
                         <span>Total:</span>
                         <span id="total">$0</span>
                     </div>
-
-                    <!-- Código de descuento -->
-                    <div class="discount-section">
-                        <input type="text" id="discountCode" placeholder="Código de descuento" class="discount-input">
-                        <button id="applyDiscount" class="apply-discount-btn">Aplicar</button>
-                    </div>
-
-                    <!-- Botones de acción -->
                     <div class="cart-actions">
                         <button id="clearCart" class="clear-cart-btn">
-                            <span>�️</span>
+                            <span></span>
                             Vaciar Carrito
                         </button>
-                        
                         <button id="checkout" class="checkout-btn">
-                            <span>💳</span>
+                            <span></span>
                             Proceder al Pago
                         </button>
                     </div>
@@ -103,7 +87,6 @@
             </div>
         </div>
 
-        <!-- Productos recomendados -->
         <div class="recommended-section" id="recommendedSection" style="display: none;">
             <h3>También te podría interesar</h3>
             <div class="recommended-products">

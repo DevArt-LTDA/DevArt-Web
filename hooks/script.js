@@ -20,14 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Guardar en localStorage
         localStorage.setItem('cart', JSON.stringify(cart));
         
-        // Mostrar mensaje de confirmación
         mostrarMensajeConfirmacion(nombre);
-        
-        // Actualizar contador del carrito (si existe)
-        actualizarContadorCarrito();
+                actualizarContadorCarrito();
     }
     
     // Función para mostrar mensaje de confirmación
@@ -37,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         mensaje.className = 'mensaje-confirmacion';
         mensaje.innerHTML = `
             <div class="mensaje-contenido">
-                <span class="icono">✅</span>
+                <span class="icono"></span>
                 <span class="texto">${nombreProducto} agregado al carrito</span>
             </div>
         `;
