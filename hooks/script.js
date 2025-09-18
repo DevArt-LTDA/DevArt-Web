@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         mensaje.className = 'mensaje-confirmacion';
         mensaje.innerHTML = `
             <div class="mensaje-contenido">
-                <span class="icono"></span>
                 <span class="texto">${nombreProducto} agregado al carrito</span>
             </div>
         `;
