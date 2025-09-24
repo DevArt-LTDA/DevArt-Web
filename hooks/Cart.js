@@ -1,24 +1,14 @@
-// Cart.js - Gestión del carrito de compras (Simple y entendible)
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let cartTotal = 0;
 let appliedDiscount = 0;
 
-// Inicializar cuando la página se carga
 document.addEventListener('DOMContentLoaded', function() {
     updateCartDisplay();
     updateCartCount();
     setupEventListeners();
 });
-
-// Configurar todos los event listeners
 function setupEventListeners() {
-    // Botón aplicar descuento
-    const applyDiscountBtn = document.getElementById('applyDiscount');
-    if (applyDiscountBtn) {
-        applyDiscountBtn.addEventListener('click', applyDiscount);
-    }
 
-    // Botón limpiar carrito
     const clearCartBtn = document.getElementById('clearCart');
     if (clearCartBtn) {
         clearCartBtn.addEventListener('click', () => {
@@ -139,26 +129,6 @@ function updateSummary() {
     cartTotal = total;
 }
 
-// Aplicar código de descuento
-function applyDiscount() {
-    const discountCode = document.getElementById('discountCode').value.trim().toLowerCase();
-    const validCodes = {
-        'devart10': 10,
-        'welcome20': 20,
-        'save15': 15
-    };
-
-    if (validCodes[discountCode]) {
-        appliedDiscount = validCodes[discountCode];
-        document.getElementById('discountCode').value = '';
-        updateSummary();
-        showNotification(`¡Descuento del ${appliedDiscount}% aplicado!`);
-    } else if (discountCode === '') {
-        showNotification('Por favor ingresa un código de descuento');
-    } else {
-        showNotification('Código de descuento inválido');
-    }
-}
 
 // Proceder al checkout
 function proceedToCheckout() {
