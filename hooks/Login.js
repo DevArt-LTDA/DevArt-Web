@@ -54,12 +54,7 @@ function isValidEmail(email) {
   return emailRegex.test(email);
 }
 
-/**
- * Simula el proceso de autenticación
- * @param {string} email - Email del usuario
- * @param {string} password - Contraseña del usuario
- * @returns {Promise} - Resultado de la autenticación
- */
+
 async function performLogin(email, password) {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -74,7 +69,7 @@ async function performLogin(email, password) {
       } else {
         resolve({ success: false, message: "Email o contraseña incorrectos" });
       }
-    }, 1500); // Simular delay de red
+    }, 1500);
   });
 }
 
@@ -87,7 +82,7 @@ togglePassword.addEventListener("click", function () {
   const type =
     passwordInput.getAttribute("type") === "password" ? "text" : "password";
   passwordInput.setAttribute("type", type);
-  this.textContent = type === "password" ? "👁️" : "🙈";
+  this.textContent = type === "password" ? "O" : "X";
 });
 
 // Validación en tiempo real
@@ -141,7 +136,6 @@ loginForm.addEventListener("submit", async function (e) {
       successMessage.style.display = "block";
       btnText.textContent = "¡Exito!";
 
-      // Guardar sesión si "recordar" está marcado
       if (document.getElementById("remember").checked) {
         localStorage.setItem(
           "rememberedUser",
