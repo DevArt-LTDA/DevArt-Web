@@ -231,10 +231,10 @@ document.addEventListener("DOMContentLoaded", function () {
   function togglePasswordVisibility(input, toggle) {
     if (input.type === "password") {
       input.type = "text";
-      toggle.textContent = "🙈";
+      toggle.textContent = "X";
     } else {
       input.type = "password";
-      toggle.textContent = "👁️";
+      toggle.textContent = "O";
     }
   }
 
